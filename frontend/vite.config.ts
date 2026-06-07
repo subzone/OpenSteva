@@ -17,7 +17,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       manifest: {
         name: 'OpenSteva',
-        short_name: 'Jarvis',
+        short_name: 'Steva',
         description: 'On-device AI assistant',
         theme_color: '#161618',
         background_color: '#161618',
