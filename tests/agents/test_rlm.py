@@ -4,12 +4,12 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from openjarvis.agents._stubs import AgentContext
-from openjarvis.agents.rlm import RLMAgent
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.registry import AgentRegistry
-from openjarvis.core.types import ToolResult
-from openjarvis.tools._stubs import BaseTool, ToolSpec
+from opensteva.agents._stubs import AgentContext
+from opensteva.agents.rlm import RLMAgent
+from opensteva.core.events import EventBus, EventType
+from opensteva.core.registry import AgentRegistry
+from opensteva.core.types import ToolResult
+from opensteva.tools._stubs import BaseTool, ToolSpec
 
 # ---------------------------------------------------------------------------
 # Helpers

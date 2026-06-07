@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - 'scripts/install/**'
-      - 'src/openjarvis/cli/**'
+      - 'src/opensteva/cli/**'
       - 'tests/install/**'
       - '.github/workflows/installer-integration.yml'
   schedule:
@@ -41,27 +41,27 @@ jobs:
 
       - uses: actions/checkout@v4
         with:
-          path: openjarvis-src
+          path: opensteva-src
 
       - name: Install Ollama mock
-        run: install -m 755 "$GITHUB_WORKSPACE/openjarvis-src/tests/install/bash/stubs/ollama-mock" /usr/local/bin/ollama
+        run: install -m 755 "$GITHUB_WORKSPACE/opensteva-src/tests/install/bash/stubs/ollama-mock" /usr/local/bin/ollama
 
       - name: Run installer
         run: |
-          chown -R testuser:testuser /home/testuser "$GITHUB_WORKSPACE/openjarvis-src"
+          chown -R testuser:testuser /home/testuser "$GITHUB_WORKSPACE/opensteva-src"
           su testuser -c '
-            export OPENJARVIS_REPO_URL=file://'"$GITHUB_WORKSPACE"'/openjarvis-src
-            cd '"$GITHUB_WORKSPACE"'/openjarvis-src
+            export OPENJARVIS_REPO_URL=file://'"$GITHUB_WORKSPACE"'/opensteva-src
+            cd '"$GITHUB_WORKSPACE"'/opensteva-src
             bash scripts/install/install.sh --no-bg-orchestrator
           '
 
       - name: Verify install state
         run: |
           su testuser -c '
-            test -d ~/.openjarvis/src
-            test -d ~/.openjarvis/.venv
-            test -f ~/.openjarvis/config.toml
-            test -f ~/.openjarvis/.state/install-state.json
+            test -d ~/.opensteva/src
+            test -d ~/.opensteva/.venv
+            test -f ~/.opensteva/config.toml
+            test -f ~/.opensteva/.state/install-state.json
             test -L ~/.local/bin/jarvis
           '
 
@@ -75,7 +75,7 @@ jobs:
         run: |
           su testuser -c '
             ~/.local/bin/jarvis-uninstall
-            test ! -d ~/.openjarvis
+            test ! -d ~/.opensteva
             test ! -L ~/.local/bin/jarvis
           '
 
@@ -100,9 +100,9 @@ jobs:
 
       - name: Verify install state
         run: |
-          test -d ~/.openjarvis/src
-          test -d ~/.openjarvis/.venv
-          test -f ~/.openjarvis/config.toml
+          test -d ~/.opensteva/src
+          test -d ~/.opensteva/.venv
+          test -f ~/.opensteva/config.toml
           test -L ~/.local/bin/jarvis
 
       - name: Verify jarvis --version
@@ -114,5 +114,5 @@ jobs:
       - name: Verify uninstall is clean
         run: |
           ~/.local/bin/jarvis-uninstall
-          test ! -d ~/.openjarvis
+          test ! -d ~/.opensteva
           test ! -L ~/.local/bin/jarvis

@@ -7,17 +7,17 @@ from unittest.mock import MagicMock, patch
 
 from click.testing import CliRunner
 
-from openjarvis.agents._stubs import (
+from opensteva.agents._stubs import (
     AgentContext,
     AgentResult,
     BaseAgent,
     ToolUsingAgent,
 )
-from openjarvis.cli.chat_cmd import _read_input, chat
-from openjarvis.core.config import JarvisConfig
-from openjarvis.core.registry import AgentRegistry, ToolRegistry
-from openjarvis.core.types import ToolCall, ToolResult
-from openjarvis.tools._stubs import BaseTool, ToolSpec
+from opensteva.cli.chat_cmd import _read_input, chat
+from opensteva.core.config import JarvisConfig
+from opensteva.core.registry import AgentRegistry, ToolRegistry
+from opensteva.core.types import ToolCall, ToolResult
+from opensteva.tools._stubs import BaseTool, ToolSpec
 
 
 class _SimpleChatAgent(BaseAgent):
@@ -106,9 +106,9 @@ class TestChatAgents:
         AgentRegistry.register_value("simple_chat_agent", _SimpleChatAgent)
 
         with (
-            patch("openjarvis.cli.chat_cmd.load_config", return_value=config),
-            patch("openjarvis.engine.get_engine", return_value=("mock", engine)),
-            patch("openjarvis.intelligence.register_builtin_models"),
+            patch("opensteva.cli.chat_cmd.load_config", return_value=config),
+            patch("opensteva.engine.get_engine", return_value=("mock", engine)),
+            patch("opensteva.intelligence.register_builtin_models"),
         ):
             result = CliRunner().invoke(
                 chat,
@@ -132,9 +132,9 @@ class TestChatAgents:
         ToolRegistry.register_value("dangerous_chat", _DangerousChatTool)
 
         with (
-            patch("openjarvis.cli.chat_cmd.load_config", return_value=config),
-            patch("openjarvis.engine.get_engine", return_value=("mock", engine)),
-            patch("openjarvis.intelligence.register_builtin_models"),
+            patch("opensteva.cli.chat_cmd.load_config", return_value=config),
+            patch("opensteva.engine.get_engine", return_value=("mock", engine)),
+            patch("opensteva.intelligence.register_builtin_models"),
         ):
             result = CliRunner().invoke(
                 chat,

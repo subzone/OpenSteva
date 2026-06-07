@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from openjarvis.core.types import ToolResult
-from openjarvis.skills.executor import SkillExecutor
-from openjarvis.skills.tool_adapter import SkillTool
-from openjarvis.skills.types import SkillManifest, SkillStep
-from openjarvis.tools._stubs import BaseTool, ToolExecutor, ToolSpec
+from opensteva.core.types import ToolResult
+from opensteva.skills.executor import SkillExecutor
+from opensteva.skills.tool_adapter import SkillTool
+from opensteva.skills.types import SkillManifest, SkillStep
+from opensteva.tools._stubs import BaseTool, ToolExecutor, ToolSpec
 
 
 class _EchoTool(BaseTool):
@@ -54,7 +54,7 @@ class TestSkillToolMetadataTagging:
             name="apple-notes",
             description="Apple Notes",
             markdown_content="Use memo",
-            metadata={"openjarvis": {"source": "hermes"}},
+            metadata={"opensteva": {"source": "hermes"}},
         )
         tool = self._make_tool(manifest)
         result = tool.execute(task="create a note")

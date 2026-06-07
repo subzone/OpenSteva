@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from openjarvis.core.config import (
+from opensteva.core.config import (
     HardwareInfo,
     JarvisConfig,
     LearningConfig,

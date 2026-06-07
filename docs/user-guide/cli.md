@@ -1,17 +1,17 @@
 # CLI Reference
 
-OpenJarvis provides a command-line interface through the `jarvis` command. Built on [Click](https://click.palletsprojects.com/), it offers subcommands for querying models, managing memory, running benchmarks, and serving an OpenAI-compatible API.
+OpenSteva provides a command-line interface through the `jarvis` command. Built on [Click](https://click.palletsprojects.com/), it offers subcommands for querying models, managing memory, running benchmarks, and serving an OpenAI-compatible API.
 
 ## Global Options
 
 ```bash
-jarvis --version   # Print the OpenJarvis version
+jarvis --version   # Print the OpenSteva version
 jarvis --help      # Show top-level help with all subcommands
 ```
 
 ## `jarvis init`
 
-Detect local hardware (CPU, GPU, RAM) and generate a configuration file at `~/.openjarvis/config.toml`.
+Detect local hardware (CPU, GPU, RAM) and generate a configuration file at `~/.opensteva/config.toml`.
 
 ```bash
 jarvis init           # Interactive — refuses to overwrite existing config
@@ -201,7 +201,7 @@ jarvis model pull qwen3:8b
 
 ## `jarvis pearl`
 
-Access Pearl's native node, wallet, and RPC tools from the OpenJarvis CLI.
+Access Pearl's native node, wallet, and RPC tools from the OpenSteva CLI.
 
 ```bash
 jarvis pearl doctor
@@ -214,7 +214,7 @@ jarvis pearl address
 All Pearl wrapper commands use the `jarvis pearl <command>` shape. The
 pass-through commands map to Pearl's native binaries:
 
-| OpenJarvis command | Pearl binary | Use |
+| OpenSteva command | Pearl binary | Use |
 |--------------------|--------------|-----|
 | `jarvis pearl doctor` | n/a | Check whether `pearld`, `oyster`, and `prlctl` are discoverable |
 | `jarvis pearl node` | `pearld` | Run the Pearl full node |
@@ -468,9 +468,9 @@ When an agent is configured (e.g., `--agent orchestrator`), non-streaming reques
 LLM-guided spec search (the frontier-driven harness-learning subsystem)
 is exposed as a Python library only — there is currently no top-level
 `jarvis` subcommand for it. Construct a `SpecSearchOrchestrator`
-directly from `openjarvis.learning.spec_search.orchestrator` and call
+directly from `opensteva.learning.spec_search.orchestrator` and call
 `.run(trigger)` with a trigger from
-`openjarvis.learning.spec_search.triggers`. See
+`opensteva.learning.spec_search.triggers`. See
 [`docs/user-guide/llm-guided-spec-search.md`](llm-guided-spec-search.md)
 for the architecture and the building blocks
 (`splits.py`, external corpora, `external_adapter`).

@@ -8,11 +8,11 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from openjarvis.channels._stubs import ChannelMessage
-from openjarvis.core.config import JarvisConfig
-from openjarvis.core.events import EventBus
-from openjarvis.sessions.session import SessionStore
-from openjarvis.system import JarvisSystem
+from opensteva.channels._stubs import ChannelMessage
+from opensteva.core.config import JarvisConfig
+from opensteva.core.events import EventBus
+from opensteva.sessions.session import SessionStore
+from opensteva.system import JarvisSystem
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -199,7 +199,7 @@ class TestChannelToolLoading:
 
     def test_tool_using_agent_receives_tools(self, tmp_path):
         """JarvisSystem built with a tool list passes tools to the agent via ask()."""
-        from openjarvis.tools._stubs import BaseTool, ToolSpec
+        from opensteva.tools._stubs import BaseTool, ToolSpec
 
         # Minimal fake tool
         class _FakeTool(BaseTool):

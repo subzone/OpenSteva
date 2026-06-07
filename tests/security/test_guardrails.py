@@ -6,10 +6,10 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.types import Message, Role
-from openjarvis.security.guardrails import GuardrailsEngine, SecurityBlockError
-from openjarvis.security.types import RedactionMode
+from opensteva.core.events import EventBus, EventType
+from opensteva.core.types import Message, Role
+from opensteva.security.guardrails import GuardrailsEngine, SecurityBlockError
+from opensteva.security.types import RedactionMode
 
 
 def _make_mock_engine(response_content: str = "Hello!") -> MagicMock:

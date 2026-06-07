@@ -1,12 +1,12 @@
-site_name: OpenJarvis
-site_url: https://open-jarvis.github.io/OpenJarvis/
+site_name: OpenSteva
+site_url: https://subzone.github.io/OpenSteva/
 site_description: Personal AI, On Personal Devices
-site_author: OpenJarvis Contributors
-repo_url: https://github.com/open-jarvis/OpenJarvis
-repo_name: open-jarvis/OpenJarvis
+site_author: OpenSteva Contributors
+repo_url: https://github.com/subzone/OpenSteva
+repo_name: subzone/OpenSteva
 edit_uri: edit/main/docs/
 
-copyright: Copyright &copy; 2026 OpenJarvis Contributors
+copyright: Copyright &copy; 2026 OpenSteva Contributors
 
 theme:
   name: material
@@ -137,10 +137,10 @@ extra:
   algolia:
     app_id: ""       # Fill after DocSearch approval
     api_key: ""      # Search-only key
-    index_name: ""   # e.g. "openjarvis"
+    index_name: ""   # e.g. "opensteva"
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/open-jarvis/OpenJarvis
+      link: https://github.com/subzone/OpenSteva
 
 nav:
   - Home: index.md

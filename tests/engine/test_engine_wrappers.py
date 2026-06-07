@@ -8,12 +8,12 @@ from typing import Any, Dict, List
 
 import pytest
 
-from openjarvis.core.events import EventBus
-from openjarvis.core.types import Message, Role
-from openjarvis.engine._stubs import InferenceEngine, StreamChunk
-from openjarvis.engine.multi import MultiEngine
-from openjarvis.security.guardrails import GuardrailsEngine
-from openjarvis.telemetry.instrumented_engine import InstrumentedEngine
+from opensteva.core.events import EventBus
+from opensteva.core.types import Message, Role
+from opensteva.engine._stubs import InferenceEngine, StreamChunk
+from opensteva.engine.multi import MultiEngine
+from opensteva.security.guardrails import GuardrailsEngine
+from opensteva.telemetry.instrumented_engine import InstrumentedEngine
 
 # ---------------------------------------------------------------------------
 # Fake engine that yields predetermined StreamChunks via stream_full

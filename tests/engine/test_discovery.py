@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from unittest import mock
 
-from openjarvis.core.config import JarvisConfig
-from openjarvis.core.registry import EngineRegistry
-from openjarvis.engine._base import InferenceEngine
-from openjarvis.engine._discovery import (
+from opensteva.core.config import JarvisConfig
+from opensteva.core.registry import EngineRegistry
+from opensteva.engine._base import InferenceEngine
+from opensteva.engine._discovery import (
     discover_engines,
     discover_models,
     get_engine,
@@ -53,7 +53,7 @@ class TestDiscoverEngines:
 
         cfg = JarvisConfig()
         with mock.patch(
-            "openjarvis.engine._discovery._make_engine",
+            "opensteva.engine._discovery._make_engine",
             side_effect=lambda k, c: _FakeEngine(healthy=(k == "healthy")),
         ):
             result = discover_engines(cfg)
@@ -67,7 +67,7 @@ class TestDiscoverEngines:
         cfg = JarvisConfig()
         cfg.engine.default = "b"
         with mock.patch(
-            "openjarvis.engine._discovery._make_engine",
+            "opensteva.engine._discovery._make_engine",
             side_effect=lambda k, c: _FakeEngine(healthy=True),
         ):
             result = discover_engines(cfg)
@@ -108,7 +108,7 @@ class TestDiscoverEngines:
 
         cfg = JarvisConfig()
         with mock.patch(
-            "openjarvis.engine._discovery._make_engine",
+            "opensteva.engine._discovery._make_engine",
             side_effect=lambda k, c: _SlowEngine(healthy=True),
         ):
             start = time.monotonic()
@@ -143,7 +143,7 @@ class TestGetEngine:
             return _FakeEngine(healthy=(k == "good"))
 
         with mock.patch(
-            "openjarvis.engine._discovery._make_engine",
+            "opensteva.engine._discovery._make_engine",
             side_effect=_make,
         ):
             result = get_engine(cfg)
@@ -166,7 +166,7 @@ class TestGetEngine:
             return _FakeEngine(healthy=(k == "running"))
 
         with mock.patch(
-            "openjarvis.engine._discovery._make_engine",
+            "opensteva.engine._discovery._make_engine",
             side_effect=_make,
         ):
             # Explicit key "requested" is unhealthy, but "running" is healthy
@@ -184,13 +184,13 @@ class TestMiningSidecarEngineHandoff:
         """When a mining sidecar exists with vllm_endpoint, discovery
         registers a ``vllm-pearl-mining`` engine in the EngineRegistry.
         """
-        from openjarvis.mining import _constants as mining_const
+        from opensteva.mining import _constants as mining_const
 
         monkeypatch.setattr(mining_const, "SIDECAR_PATH", written_sidecar)
 
         cfg = JarvisConfig()
         with mock.patch(
-            "openjarvis.engine._discovery._make_engine",
+            "opensteva.engine._discovery._make_engine",
             side_effect=lambda k, c: _FakeEngine(healthy=True),
         ):
             discover_engines(cfg)
@@ -201,14 +201,14 @@ class TestMiningSidecarEngineHandoff:
         self, tmp_path, monkeypatch
     ) -> None:
         """No mining sidecar → no ``vllm-pearl-mining`` engine registered."""
-        from openjarvis.mining import _constants as mining_const
+        from opensteva.mining import _constants as mining_const
 
         missing = tmp_path / "no-such-mining.json"
         monkeypatch.setattr(mining_const, "SIDECAR_PATH", missing)
 
         cfg = JarvisConfig()
         with mock.patch(
-            "openjarvis.engine._discovery._make_engine",
+            "opensteva.engine._discovery._make_engine",
             side_effect=lambda k, c: _FakeEngine(healthy=True),
         ):
             discover_engines(cfg)
@@ -236,13 +236,13 @@ class TestMiningSidecarEngineHandoff:
                 }
             )
         )
-        from openjarvis.mining import _constants as mining_const
+        from opensteva.mining import _constants as mining_const
 
         monkeypatch.setattr(mining_const, "SIDECAR_PATH", sidecar)
 
         cfg = JarvisConfig()
         with mock.patch(
-            "openjarvis.engine._discovery._make_engine",
+            "opensteva.engine._discovery._make_engine",
             side_effect=lambda k, c: _FakeEngine(healthy=True),
         ):
             discover_engines(cfg)

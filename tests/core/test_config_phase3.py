@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.core.config import (
+from opensteva.core.config import (
     AgentConfig,
     HardwareInfo,
     JarvisConfig,

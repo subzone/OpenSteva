@@ -4,14 +4,14 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from openjarvis.agents._stubs import AgentResult, ToolUsingAgent
-from openjarvis.core.config import (
+from opensteva.agents._stubs import AgentResult, ToolUsingAgent
+from opensteva.core.config import (
     CapabilitiesConfig,
     JarvisConfig,
     SecurityConfig,
 )
-from openjarvis.core.events import EventBus
-from openjarvis.security import setup_security
+from opensteva.core.events import EventBus
+from opensteva.security import setup_security
 
 
 class _ConcreteAgent(ToolUsingAgent):
@@ -39,7 +39,7 @@ def _make_mock_engine() -> MagicMock:
 
 def _has_rust() -> bool:
     try:
-        import openjarvis_rust  # noqa: F401
+        import opensteva_rust  # noqa: F401
 
         return True
     except ImportError:

@@ -56,10 +56,10 @@ def main(
     reasons about root causes, and suggests a concrete fix.
     """
     try:
-        from openjarvis import Jarvis
+        from opensteva import Jarvis
     except ImportError:
         click.echo(
-            "Error: openjarvis is not installed. "
+            "Error: opensteva is not installed. "
             "Install it with:  uv sync --extra dev",
             err=True,
         )

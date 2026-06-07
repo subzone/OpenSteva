@@ -1,6 +1,6 @@
 # Docker Deployment
 
-OpenJarvis provides Docker images for both CPU-only and GPU-accelerated deployments, along with a Docker Compose configuration that bundles the API server with an Ollama inference backend.
+OpenSteva provides Docker images for both CPU-only and GPU-accelerated deployments, along with a Docker Compose configuration that bundles the API server with an Ollama inference backend.
 
 ## Quick Start
 
@@ -27,7 +27,7 @@ This brings up two services:
 
 | Service  | Port  | Description                        |
 |----------|-------|------------------------------------|
-| `jarvis` | 8000  | OpenJarvis API server              |
+| `jarvis` | 8000  | OpenSteva API server              |
 | `ollama` | 11434 | Ollama inference engine            |
 
 Verify the server is running:
@@ -50,7 +50,7 @@ The default `Dockerfile` uses a multi-stage build based on `python:3.12-slim` to
 
 **Build stages:**
 
-1. **Builder stage** -- installs `uv` and the `openjarvis[server]` package (which includes FastAPI, uvicorn, and all server dependencies) from the project source.
+1. **Builder stage** -- installs `uv` and the `opensteva[server]` package (which includes FastAPI, uvicorn, and all server dependencies) from the project source.
 2. **Runtime stage** -- copies only the installed Python packages and application code from the builder, keeping the final image small.
 
 ```dockerfile
@@ -78,13 +78,13 @@ CMD ["serve", "--host", "0.0.0.0", "--port", "8000"]
 Build it manually:
 
 ```bash
-docker build -t openjarvis:latest .
+docker build -t opensteva:latest .
 ```
 
 Run it standalone:
 
 ```bash
-docker run -d -p 8000:8000 openjarvis:latest
+docker run -d -p 8000:8000 opensteva:latest
 ```
 
 ### GPU Image (`Dockerfile.gpu`)
@@ -124,13 +124,13 @@ CMD ["serve", "--host", "0.0.0.0", "--port", "8000"]
 Build the GPU image:
 
 ```bash
-docker build -f Dockerfile.gpu -t openjarvis:gpu .
+docker build -f Dockerfile.gpu -t opensteva:gpu .
 ```
 
 Run with GPU access (requires the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)):
 
 ```bash
-docker run -d --gpus all -p 8000:8000 openjarvis:gpu
+docker run -d --gpus all -p 8000:8000 opensteva:gpu
 ```
 
 !!! note "NVIDIA Container Toolkit required"
@@ -138,7 +138,7 @@ docker run -d --gpus all -p 8000:8000 openjarvis:gpu
 
 ## Docker Compose Configuration
 
-The `docker-compose.yml` defines a complete deployment with the OpenJarvis API server and an Ollama backend:
+The `docker-compose.yml` defines a complete deployment with the OpenSteva API server and an Ollama backend:
 
 ```yaml
 version: "3.9"
@@ -190,7 +190,7 @@ The `jarvis` service declares `depends_on: ollama`, ensuring the Ollama containe
 
 ### Mounting a Configuration File
 
-To use a custom `config.toml`, mount it into the container at the expected path (`~/.openjarvis/config.toml`, which is `/root/.openjarvis/config.toml` in the container):
+To use a custom `config.toml`, mount it into the container at the expected path (`~/.opensteva/config.toml`, which is `/root/.opensteva/config.toml` in the container):
 
 ```yaml
 services:
@@ -201,7 +201,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./my-config.toml:/root/.openjarvis/config.toml:ro
+      - ./my-config.toml:/root/.opensteva/config.toml:ro
     environment:
       - OPENJARVIS_ENGINE_DEFAULT=ollama
       - OPENJARVIS_OLLAMA_HOST=http://ollama:11434
@@ -212,18 +212,18 @@ services:
 
 ### Persisting Data
 
-To persist telemetry data, memory databases, and trace records across container restarts, mount the entire OpenJarvis data directory:
+To persist telemetry data, memory databases, and trace records across container restarts, mount the entire OpenSteva data directory:
 
 ```yaml
 services:
   jarvis:
     # ... other config ...
     volumes:
-      - openjarvis-data:/root/.openjarvis
+      - opensteva-data:/root/.opensteva
 
 volumes:
   ollama-models:
-  openjarvis-data:
+  opensteva-data:
 ```
 
 This preserves:
@@ -310,7 +310,7 @@ RUN pip install --no-cache-dir uv && \
 The entrypoint is `jarvis` and the default command is `serve --host 0.0.0.0 --port 8000`. Override the command to change server options:
 
 ```bash
-docker run -d -p 9000:9000 openjarvis:latest \
+docker run -d -p 9000:9000 opensteva:latest \
   serve --host 0.0.0.0 --port 9000 --engine ollama --model qwen3:8b
 ```
 

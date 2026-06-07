@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 from click.testing import CliRunner
 
-from openjarvis.cli import cli
+from opensteva.cli import cli
 
 
 class TestConfigCmd:

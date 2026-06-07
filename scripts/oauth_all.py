@@ -18,9 +18,9 @@ from urllib.parse import parse_qs, urlencode, urlparse
 
 import httpx
 
-from openjarvis.core import open_browser
+from opensteva.core import open_browser
 
-CONFIG_DIR = Path.home() / ".openjarvis" / "connectors"
+CONFIG_DIR = Path.home() / ".opensteva" / "connectors"
 CONFIG_DIR.mkdir(parents=True, exist_ok=True)
 
 CALLBACK_PORT = 8789
@@ -339,7 +339,7 @@ def do_spotify() -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Run OAuth flows for OpenJarvis connectors"
+        description="Run OAuth flows for OpenSteva connectors"
     )
     parser.add_argument("--google", action="store_true", help="Only Google")
     parser.add_argument("--strava", action="store_true", help="Only Strava")

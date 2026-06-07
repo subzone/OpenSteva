@@ -1,0 +1,98 @@
+# OpenSteva — Code Assistant Configuration
+# ═══════════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════════
+# PILLAR 1: Intelligence — The Model
+# ═══════════════════════════════════════════════════════════════
+[intelligence]
+default_model = "qwen2.5-coder:7b"       # Ollama model tag
+fallback_model = "qwen2.5-coder:7b"
+preferred_engine = "ollama"               # Local inference via Ollama
+provider = "local"
+quantization = "q4_K_M"                   # Good balance for Apple Silicon / consumer GPUs
+temperature = 0.2                         # Low temp for code accuracy
+max_tokens = 4096                         # Longer output for code generation
+top_p = 0.9
+top_k = 40
+repetition_penalty = 1.0
+
+# ═══════════════════════════════════════════════════════════════
+# PILLAR 2: Agent — Code Assistant Harness
+# ═══════════════════════════════════════════════════════════════
+[agent]
+default_agent = "code_assistant"
+max_turns = 15
+tools = "file_read,file_write,shell,code_exec,search_web,think"
+objective = "Help the user write, debug, refactor, and understand code"
+context_from_memory = true
+
+# ═══════════════════════════════════════════════════════════════
+# PILLAR 3: Tools — MCP Interface
+# ═══════════════════════════════════════════════════════════════
+[tools.storage]
+default_backend = "sqlite"
+db_path = "~/.opensteva/memory.db"
+
+[tools.mcp]
+enabled = true
+
+# ═══════════════════════════════════════════════════════════════
+# PILLAR 4: Engine — The Inference Runtime
+# ═══════════════════════════════════════════════════════════════
+[engine]
+default = "ollama"
+
+[engine.ollama]
+host = "http://localhost:11434"
+
+[engine.vllm]
+host = "http://localhost:8001"
+
+[engine.mlx]
+host = "http://localhost:8080"
+
+[engine.llamacpp]
+host = "http://localhost:8080"
+
+# ═══════════════════════════════════════════════════════════════
+# PILLAR 5: Learning — Improvement Methodologies
+# ═══════════════════════════════════════════════════════════════
+[learning]
+enabled = true                            # Learn from local coding sessions
+
+[learning.routing]
+policy = "heuristic"
+
+[learning.intelligence]
+policy = "none"
+
+[learning.agent]
+policy = "none"
+
+[learning.metrics]
+accuracy_weight = 0.7
+latency_weight = 0.2
+cost_weight = 0.0
+efficiency_weight = 0.1
+
+# ═══════════════════════════════════════════════════════════════
+# Supporting config
+# ═══════════════════════════════════════════════════════════════
+[analytics]
+enabled = false                           # No external telemetry — fully local
+
+[telemetry]
+enabled = true                            # Local performance metrics only
+db_path = "~/.opensteva/telemetry.db"
+gpu_metrics = true
+gpu_poll_interval_ms = 100
+energy_vendor = ""
+
+[traces]
+enabled = true
+db_path = "~/.opensteva/traces.db"
+
+[server]
+host = "127.0.0.1"                        # Localhost only — no network exposure
+port = 8000
+agent = "code_assistant"

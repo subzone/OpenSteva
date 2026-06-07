@@ -86,4 +86,4 @@ class TestDockerFiles:
         assert "ollama:" in content
 
     def test_systemd_service_exists(self):
-        assert (ROOT / "deploy" / "systemd" / "openjarvis.service").is_file()
+        assert (ROOT / "deploy" / "systemd" / "opensteva.service").is_file()

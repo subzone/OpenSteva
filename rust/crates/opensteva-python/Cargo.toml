@@ -1,0 +1,32 @@
+[package]
+name = "opensteva-python"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "opensteva_rust"
+crate-type = ["cdylib"]
+
+[dependencies]
+opensteva-core = { path = "../opensteva-core" }
+opensteva-engine = { path = "../opensteva-engine" }
+opensteva-security = { path = "../opensteva-security" }
+opensteva-tools = { path = "../opensteva-tools" }
+opensteva-agents = { path = "../opensteva-agents" }
+opensteva-traces = { path = "../opensteva-traces" }
+opensteva-telemetry = { path = "../opensteva-telemetry" }
+opensteva-learning = { path = "../opensteva-learning" }
+opensteva-mcp = { path = "../opensteva-mcp" }
+opensteva-sessions = { path = "../opensteva-sessions" }
+opensteva-workflow = { path = "../opensteva-workflow" }
+opensteva-skills = { path = "../opensteva-skills" }
+opensteva-recipes = { path = "../opensteva-recipes" }
+opensteva-templates = { path = "../opensteva-templates" }
+opensteva-a2a = { path = "../opensteva-a2a" }
+opensteva-scheduler = { path = "../opensteva-scheduler" }
+pyo3 = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tokio = { workspace = true }
+once_cell = { workspace = true }
+parking_lot = { workspace = true }
